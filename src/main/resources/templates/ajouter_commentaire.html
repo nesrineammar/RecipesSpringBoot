@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Ajouter un commentaire</title>
+</head>
+<body>
+<h1>Ajouter un commentaire</h1>
+<form action="/ajouter-commentaire" method="post" th:object="${nouveauCommentaire}">
+  <label for="texte">Commentaire :</label><br>
+  <textarea id="texte" name="texte" th:field="*{texte}"></textarea><br>
+  <button type="submit">Ajouter</button>
+</form>
+</body>
+</html>

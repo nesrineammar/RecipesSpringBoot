@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Détails de la recette</title>
+</head>
+<body>
+<h1 th:text="${recette.titre}"></h1>
+<p th:text="${recette.description}"></p>
+<h2>Ingrédients</h2>
+<ul>
+  <li th:each="ingredient : ${recette.ingrédients}">
+    <span th:text="${ingredient.quantité}"></span> -
+    <span th:text="${ingredient.nom}"></span>
+  </li>
+</ul>
+<p>Instructions :</p>
+<p th:text="${recette.instructions}"></p>
+<h2>Commentaires :</h2>
+<div th:if="${not #lists.isEmpty(commentaires)}">
+  <ul>
+    <li th:each="commentaire : ${recette.commentaires}">
+      <p> <span th:text="${commentaire.texte}"></span></p>
+    </li>
+  </ul>
+</div>
+<div th:if="${#lists.isEmpty(recette.commentaires)}">
+  <p>Aucun commentaire pour le moment.</p>
+</div>
+<form th:action="@{/commentaires/recettes/{id}/commentaires(id=${recette.id})}" method="post">
+
+  <div>
+    <label for="texte">Commentaire :</label>
+    <textarea id="texte" name="texte" required></textarea>
+  </div>
+  <button type="submit">Ajouter un commentaire</button>
+</form>
+</body>
+</html>
